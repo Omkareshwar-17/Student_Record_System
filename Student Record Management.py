@@ -32,11 +32,11 @@ def validate_phone(phone):
     return re.match(r"^[6-9][0-9]{9}$", phone)
 
 def calculate_grade(percentage):
-    if percentage >= 90: return "A+"
-    elif percentage >= 80: return "A"
-    elif percentage >= 70: return "B"
-    elif percentage >= 60: return "C"
-    elif percentage >= 50: return "D"
+    if percentage >= 75: return "A+"
+    elif percentage >= 65: return "A"
+    elif percentage >= 55: return "B"
+    elif percentage >= 45: return "C"
+    elif percentage >= 35: return "D"
     else: return "F"
 
 def get_student_data():
@@ -54,6 +54,10 @@ def get_student_data():
             messagebox.showerror("Error", "Invalid Email!")
             return None
 
+        if not validate_phone(phone_entry.get().strip()):
+            messagebox.showerror("Error", "Invalid Phone Number!")
+            return None
+
         total = sum(marks)
         perc = total / 5
         return (sap, name_entry.get().strip(), int(age_entry.get()), course_entry.get().strip(), 
@@ -66,7 +70,6 @@ def get_student_data():
         messagebox.showerror("Error", "Age and Marks must be numbers!")
         return None
 
-# --- CRUD Operations ---
 def add_student():
     data = get_student_data()
     if data:
